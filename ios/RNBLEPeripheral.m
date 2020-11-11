@@ -15,14 +15,21 @@ RCT_EXTERN_METHOD(
     setName: (NSString *)string
 )
 RCT_EXTERN_METHOD(
-    addService: (NSString *)uuid
-    primary:    (BOOL)primary
+    createService:              (NSString *)uuid
+    primary:                    (BOOL)primary
 )
 RCT_EXTERN_METHOD(
-    addCharacteristicToService: (NSString *)uuid
-    permissions:                (NSInteger *)permissions
-    properties:                 (NSInteger *)properties
-    data:                       (NSString *)data
+    addCharacteristicToService: (NSString *)serviceUUID
+    uuid:                       (NSString *)uuid
+    permissions:                (NSString *)permissions
+    properties:                 (NSString *)properties
+)
+RCT_EXTERN_METHOD(
+    publishService: (NSString *)uuid
+)
+RCT_EXTERN_METHOD(
+    updateValue:                (NSString *)uuid
+    value:                      (NSInteger *)data
 )
 RCT_EXTERN_METHOD(
     start:
@@ -35,5 +42,10 @@ RCT_EXTERN_METHOD(
     data: (NSString *)data
 )
 RCT_EXTERN_METHOD(requiresMainQueueSetup)
+
+- (NSArray<NSString *> *)supportedEvents
+{
+  return @[ @"stateUpdated", @"serviceAdded", @"writeEvent", @"onWarning" ];
+}
 
 @end
